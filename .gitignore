@@ -217,4 +217,5 @@ __marimo__/
 
 /static
 src/db.sqlite3
+container.db.sqlite3
 src/static
