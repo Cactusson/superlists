@@ -1,3 +1,4 @@
+import os
 import time
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -12,6 +13,9 @@ MAX_WAIT = 5
 class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
+
+        if test_server := os.environ.get("TEST_SERVER"):
+            self.live_server_url = "http://" + test_server  # type: ignore
 
     def tearDown(self):
         self.browser.quit()
