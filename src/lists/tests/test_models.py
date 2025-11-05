@@ -6,6 +6,10 @@ from lists.models import Item, List
 
 
 class ListAndItemModelTest(TestCase):
+    def test_get_absolute_url(self):
+        mylist = List.objects.create()
+        self.assertEqual(mylist.get_absolute_url(), f"/lists/{mylist.id}/")
+
     def test_saving_and_retrieving_items(self):
         mylist = List()
         mylist.save()
