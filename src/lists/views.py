@@ -1,6 +1,5 @@
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
-from django.urls import reverse
 
 from lists.forms import ItemForm
 from lists.models import Item, List
@@ -12,27 +11,25 @@ def home_page(request):
 
 
 def new_list(request):
-    nulist = List.objects.create()
-    item = Item.objects.create(text=request.POST["text"], list=nulist)
-    try:
-        item.full_clean()
-    except ValidationError:
-        nulist.delete()
-        context = {"error": "You can't have an empty list item"}
+    form = ItemForm(data=request.POST)
+    if form.is_valid():
+        nulist = List.objects.create()
+        Item.objects.create(text=request.POST["text"], list=nulist)
+        return redirect(nulist)
+    else:
+        context = {"form": form}
         return render(request, "lists/home.html", context)
-    return redirect(nulist)
 
 
 def view_list(request, list_id):
     our_list = List.objects.get(id=list_id)
-    context = {"list": our_list, "error": None}
     if request.method == "POST":
-        try:
-            item = Item(text=request.POST["text"], list=our_list)
-            item.full_clean()
-            item.save()
+        form = ItemForm(data=request.POST)
+        if form.is_valid():
+            Item.objects.create(text=request.POST["text"], list=our_list)
             return redirect(our_list)
-        except ValidationError:
-            context["error"] = "You can't have an empty list item"
-            return render(request, "lists/list.html", context)
+    else:
+        form = ItemForm()
+
+    context = {"list": our_list, "form": form}
     return render(request, "lists/list.html", context)
