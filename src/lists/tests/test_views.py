@@ -2,6 +2,7 @@ import lxml.html
 from django.test import TestCase
 from django.utils import html
 
+from lists.forms import ItemForm
 from lists.models import Item, List
 
 
@@ -17,6 +18,10 @@ class HomePageTest(TestCase):
         self.assertEqual(form.get("action"), "/lists/new/")
         inputs = form.cssselect("input")
         self.assertIn("item_text", [input.get("name") for input in inputs])
+
+    def test_home_page_uses_item_form(self):
+        response = self.client.get("/")
+        self.assertIsInstance(response.context["form"], ItemForm)
 
 
 class NewListTest(TestCase):
