@@ -21,6 +21,12 @@ class ItemForm(forms.ModelForm):
         }
         error_messages = {"text": {"required": EMPTY_ITEM_ERROR}}
 
+    def is_valid(self):
+        result = super().is_valid()
+        if not result:
+            self.fields["text"].widget.attrs["class"] += " is-invalid"
+        return result
+
     def save(self, for_list):
         self.instance.list = for_list
         return super().save()
@@ -35,3 +41,7 @@ class ExistingListItemForm(ItemForm):
         text = self.cleaned_data["text"]
         if self.instance.list.item_set.filter(text=text).exists():
             raise forms.ValidationError(DUPLICATE_ITEM_ERROR)
+        return text
+
+    def save(self):
+        return forms.ModelForm.save(self)

@@ -33,7 +33,7 @@ class ListModelTest(TestCase):
         mylist = List.objects.create()
         Item.objects.create(list=mylist, text="bla")
         with self.assertRaises(ValidationError):
-            item = Item.objects.create(list=mylist, text="bla")
+            item = Item(list=mylist, text="bla")
             item.full_clean()
 
     def test_can_save_same_item_to_different_lists(self):
@@ -43,8 +43,19 @@ class ListModelTest(TestCase):
         item = Item.objects.create(list=list2, text="bla")
         item.full_clean()
 
+    def test_list_items_order(self):
+        list1 = List.objects.create()
+        item1 = Item.objects.create(list=list1, text="i1")
+        item2 = Item.objects.create(list=list1, text="item 2")
+        item3 = Item.objects.create(list=list1, text="3")
+        self.assertEqual(list(list1.item_set.all()), [item1, item2, item3])
+
 
 class ItemModelTest(TestCase):
     def test_get_absolute_url(self):
         mylist = List.objects.create()
         self.assertEqual(mylist.get_absolute_url(), f"/lists/{mylist.id}/")
+
+    def test_string_representation(self):
+        item = Item(text="some text")
+        self.assertEqual(str(item), "some text")
