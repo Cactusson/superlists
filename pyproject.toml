@@ -10,6 +10,7 @@ dependencies = [
     "docker>=7.1.0",
     "gunicorn>=23.0.0",
     "lxml[cssselect]>=6.0.2",
+    "python-decouple>=3.8",
     "selenium>=4.38.0",
     "whitenoise>=6.11.0",
 ]
