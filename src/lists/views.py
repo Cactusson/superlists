@@ -32,3 +32,7 @@ def view_list(request, list_id):
 
     context = {"list": our_list, "form": form}
     return render(request, "lists/list.html", context)
+
+
+def my_lists(request, email):
+    return render(request, "lists/my_lists.html")
