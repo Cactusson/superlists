@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "accounts",
+    "functional_tests",
     "lists",
 ]
 
@@ -151,5 +152,6 @@ AUTHENTICATION_BACKENDS = [
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "matt8th@gmail.com"
 EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD")
+# EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
