@@ -59,6 +59,12 @@ class ListModelTest(TestCase):
     def test_list_owner_is_optional(self):
         List.objects.create()  # should not raise
 
+    def test_list_name_is_first_item_text(self):
+        mylist = List.objects.create()
+        Item.objects.create(list=mylist, text="first item")
+        Item.objects.create(list=mylist, text="second item")
+        self.assertEqual(mylist.name, "first item")
+
 
 class ItemModelTest(TestCase):
     def test_get_absolute_url(self):
