@@ -2,6 +2,7 @@ import lxml.html
 from django.test import TestCase
 from django.utils import html
 
+from accounts.models import User
 from lists.forms import DUPLICATE_ITEM_ERROR, EMPTY_ITEM_ERROR, ItemForm
 from lists.models import Item, List
 
@@ -49,6 +50,13 @@ class NewListTest(TestCase):
         self.client.post("/lists/new/", data={"text": ""})
         self.assertEqual(List.objects.count(), 0)
         self.assertEqual(Item.objects.count(), 0)
+
+    def test_list_owner_is_saved_if_user_is_authenticated(self):
+        user = User.objects.create(email="a@b.com")
+        self.client.force_login(user)
+        self.client.post("/lists/new/", data={"text": "new item"})
+        new_list = List.objects.get()
+        self.assertEqual(new_list.owner, user)
 
 
 class ListViewTest(TestCase):
@@ -153,5 +161,12 @@ class ListViewTest(TestCase):
 
 class MyListsTest(TestCase):
     def test_my_lists_url_renders_my_lists_template(self):
+        User.objects.create(email="a@b.com")
         response = self.client.get("/lists/users/a@b.com/")
         self.assertTemplateUsed(response, "lists/my_lists.html")
+
+    def test_passes_correct_owner_to_template(self):
+        User.objects.create(email="wrong@owner.com")
+        correct_user = User.objects.create(email="right@owner.com")
+        response = self.client.get("/lists/users/right@owner.com/")
+        self.assertEqual(response.context["owner"], correct_user)
