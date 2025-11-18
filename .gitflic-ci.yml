@@ -1,2 +1,8 @@
-job 1:
-  script: echo "Hello"
+name: Check
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        run: echo "Hello"
