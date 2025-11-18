@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "before"
+      - run: ls -la
       - run: pip install virtualenv
       - run: virtualenv .venv
       - run: source .venv/bin/activate
