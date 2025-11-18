@@ -1,8 +1,0 @@
-name: Check
-on: push
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        run: echo "Hello"
