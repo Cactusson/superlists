@@ -1,5 +1,9 @@
 name: Test
 on: push
+
+env:
+  MOZ_HEADLESS: "1"
+
 jobs:
   test:
     runs-on: ubuntu-latest
