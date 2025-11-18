@@ -28,6 +28,6 @@ jobs:
       - run: chmod +x geckodriver
       - run: sudo mv geckodriver /usr/local/bin/
       - run: /usr/bin/firefox --version
-      - run: /usr/local/bin/geckodriver --version --version
+      - run: /usr/local/bin/geckodriver --version
       - run: cd src && python manage.py test
       - run: echo "after after"
