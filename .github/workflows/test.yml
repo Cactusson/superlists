@@ -23,5 +23,6 @@ jobs:
       - run: python src/manage.py test lists accounts
       - run: sudo apt update -y && sudo apt install -y firefox
       - run: pip install selenium
+      - run: /usr/bin/firefox --version
       - run: cd src && python manage.py test
       - run: echo "after"
