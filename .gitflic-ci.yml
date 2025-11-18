@@ -1,8 +1,12 @@
-name: Check
-on: push
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        run: echo "Hello"
+image: ubuntu:latest
+
+before_script:
+  - echo "Скрипт до основных инструкций (в каждой задаче)"
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - echo "Сборка проекта"
