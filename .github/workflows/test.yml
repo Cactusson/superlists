@@ -1,0 +1,15 @@
+name: Test
+on: push
+jobs:
+  test:
+    runs-on: python:slim
+    steps:
+      - run: echo "before"
+      - run: pip install virtualenv
+      - run: virtualenv .venv
+      - run: source .venv/bin/activate
+      - run: pip install -r requirements.txt
+      - run: python src/manage.py test lists accounts
+      - run: pip install selenium
+      - run: cd src && python manage.py test
+      - run: echo "after"
