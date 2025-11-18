@@ -2,7 +2,7 @@ name: Test
 on: push
 jobs:
   test:
-    runs-on: python:slim
+    runs-on: ubuntu-latest
     steps:
       - run: echo "before"
       - run: pip install virtualenv
