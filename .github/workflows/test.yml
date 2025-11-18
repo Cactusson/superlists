@@ -17,7 +17,7 @@ jobs:
       - run: ls -la
       - run: pip install -r requirements.txt
       - run: python src/manage.py test lists accounts
-      - run: apt update -y && apt install -y firefox-esr
+      - run: sudo apt update -y && sudo apt install -y firefox-esr
       - run: pip install selenium
       - run: cd src && python manage.py test
       - run: echo "after"
