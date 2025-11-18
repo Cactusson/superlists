@@ -30,4 +30,4 @@ jobs:
       - run: /usr/bin/firefox --version
       - run: /usr/local/bin/geckodriver --version --version
       - run: cd src && python manage.py test
-      - run: echo "after"
+      - run: echo "after after"
