@@ -28,6 +28,8 @@ class NewVisitorTest(FunctionalTest):
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table("1: Buy peacock feathers")
 
+        self.fail()
+
         # There is still a text box inviting her to add another item.
         # She enters "Use peacock feathers to make a fly" (Edith is very methodical)
         inputbox = self.get_item_input_box()
