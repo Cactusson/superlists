@@ -41,9 +41,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: chmod +x infra/install_firefox.sh
       - run: bash infra/install_firefox.sh
-      - run: pwd
-      - run: cd src
-      - run: pwd
-      - run: ls -la
-      - run: npm install
-      - run: npx jasmine-browser-runner runSpecs --config=tests/jasmine-browser-runner.config.mjs
+      - run: |
+          pwd
+          cd src/lists/static
+          pwd
+          npm install
+          npx jasmine-browser-runner runSpecs --config=tests/jasmine-browser-runner.config.mjs
