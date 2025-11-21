@@ -5,10 +5,9 @@ env:
   MOZ_HEADLESS: "1"
 
 jobs:
-  test:
+  test-python:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "before"
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
@@ -35,5 +34,13 @@ jobs:
         with:
           name: screendumps
           path: src/functional_tests/screendumps/
-      # - run: python infra/debug-ci.py
-      - run: echo "after"
+
+  test-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: chmod +x infra/install_firefox.sh
+      - run: bash infra/install_firefox.sh
+      - run: cd src/lists/static
+      - run: npm install
+      - run: npx jasmine-browser-runner runSpecs --config=tests/jasmine-browser-runner.config.mjs
