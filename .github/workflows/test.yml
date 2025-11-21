@@ -33,6 +33,6 @@ jobs:
       - run: sudo mv geckodriver /usr/local/bin/
       - run: /usr/bin/firefox --version
       - run: /usr/local/bin/geckodriver --version
-      # - run: cd src && python manage.py test
-      - run: python infra/debug-ci.py
+      - run: cd src && python manage.py test
+      # - run: python infra/debug-ci.py
       - run: echo "after"
