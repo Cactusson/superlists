@@ -13,12 +13,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.14"
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: screendumps
-          path: src/functional_tests/screendumps/
       - name: 'Create env file'
         run: |
           touch .env
@@ -35,5 +29,11 @@ jobs:
       # - run: chmod +x geckodriver
       # - run: sudo mv geckodriver /usr/local/bin/
       - run: cd src && python manage.py test
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screendumps
+          path: src/functional_tests/screendumps/
       # - run: python infra/debug-ci.py
       - run: echo "after"
