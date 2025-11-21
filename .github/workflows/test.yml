@@ -42,5 +42,5 @@ jobs:
       - run: chmod +x infra/install_firefox.sh
       - run: bash infra/install_firefox.sh
       - run: cd src/lists/static
-      - run: npm install
+      - run: npm install ./package.json
       - run: npx jasmine-browser-runner runSpecs --config=tests/jasmine-browser-runner.config.mjs
