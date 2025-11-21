@@ -22,17 +22,17 @@ jobs:
       - run: pip install -r requirements.txt
       # - run: python src/manage.py test lists accounts
       # - run: /usr/bin/firefox --version
-      # - run: chmod +x infra/install_firefox.sh
-      # - run: bash infra/install_firefox.sh
+      - run: chmod +x infra/install_firefox.sh
+      - run: bash infra/install_firefox.sh
       # - run: /usr/bin/firefox --version
-      - run: sudo apt update -y && sudo apt remove firefox && sudo apt install -y firefox
+      # - run: sudo apt update -y && sudo apt install -y firefox
       - run: pip install selenium
-      - run: wget https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-linux32.tar.gz
-      - run: tar -xvzf geckodriver*
-      - run: chmod +x geckodriver
-      - run: sudo mv geckodriver /usr/local/bin/
-      - run: /usr/bin/firefox --version
-      - run: /usr/local/bin/geckodriver --version
+      # - run: wget https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-linux32.tar.gz
+      # - run: tar -xvzf geckodriver*
+      # - run: chmod +x geckodriver
+      # - run: sudo mv geckodriver /usr/local/bin/
+      # - run: /usr/bin/firefox --version
+      # - run: /usr/local/bin/geckodriver --version
       # - run: cd src && python manage.py test
       - run: python infra/debug-ci.py
       - run: echo "after"
