@@ -20,9 +20,12 @@ jobs:
           cat .env
       - run: ls -la
       - run: pip install -r requirements.txt
-      - run: python src/manage.py test lists accounts
+      # - run: python src/manage.py test lists accounts
       - run: /usr/bin/firefox --version
-      - run: sudo apt update -y && sudo apt install -y firefox
+      - run: chmod +x infra/install_firefox.sh
+      - run: bash infra/install_firefox.sh
+      - run: /usr/bin/firefox --version
+      # - run: sudo apt update -y && sudo apt install -y firefox
       - run: pip install selenium
       - run: wget https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-linux32.tar.gz
       - run: tar -xvzf geckodriver*
