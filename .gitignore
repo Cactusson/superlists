@@ -220,3 +220,4 @@ src/db.sqlite3
 container.db.sqlite3
 src/static
 src/functional_tests/screendumps/
+node_modules/
